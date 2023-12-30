@@ -2,11 +2,11 @@ import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nes
 import { Reflector } from '@nestjs/core';
 
 import { Observable, tap } from 'rxjs';
-import { AuditlogsService } from 'src/auditlogs/auditlogs.service';
+import { LoggersService } from 'src/loggers/loggers.service';
 
 @Injectable()
 export class AuditLogInterceptor implements NestInterceptor {
-  constructor(private readonly reflector: Reflector, private audiLogService: AuditlogsService) {}
+  constructor(private readonly reflector: Reflector, private loggerService: LoggersService) {}
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const auditlog = this.reflector.get<string>('AUDIT_LOG_DATA', context.getHandler());
     const request = context.switchToHttp().getRequest();
@@ -14,11 +14,7 @@ export class AuditLogInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(async () => {
-        const payload = await this.audiLogService.create({
-          company: 'Rusman',
-          user: user.id,
-          action: auditlog,
-        });
+        this.loggerService.createLog({ user: user?.email, action: auditlog });
       }),
     );
   }
