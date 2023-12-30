@@ -10,12 +10,10 @@
 - [x] Create global custom exception filter to catch global errors
 - [x] Use email and otp for user login instead of username and password; use otplib npm package
 - [x] Enable User Authentication
-- [x] Enabled Social Logins using Passport (JWT/ Local)
 - [x] Added Mailing SMTP service for Mailing using Nodemailer with handlebars for email templates
 - [x] Added Bull for Queuing purpose (currently using for Queuing Emails)
-- [x] Replace Sqlite db with Prisma/Postgres
 - [x] Linter (tslint + eslint + prettier)
-- [x] Integration Testing / Unit Testing using Jest [With Test DB Environment]
+- [x] Advance user monitoring system with nestjs and postgres SQL.
 
 ## Description
 
