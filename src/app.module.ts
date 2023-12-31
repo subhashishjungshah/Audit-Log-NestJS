@@ -7,6 +7,8 @@ import { MailModule } from './mailer/mailer.module';
 import { UsersModule } from './users/users.module';
 import { AuditlogsModule } from './auditlogs/auditlogs.module';
 import { LoggersModule } from './loggers/loggers.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { CronjobsModule } from './cronjobs/cronjobs.module';
 
 @Module({
   imports: [
@@ -21,12 +23,14 @@ import { LoggersModule } from './loggers/loggers.module';
       }),
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
     AuthModule,
     PrismaModule,
     MailModule,
     UsersModule,
     AuditlogsModule,
     LoggersModule,
+    CronjobsModule,
   ],
 })
 export class AppModule {}
