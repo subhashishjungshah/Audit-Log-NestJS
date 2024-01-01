@@ -12,6 +12,16 @@ export const users = [
     roles: [ROLE.ADMIN],
     email: 'subhashish@mailinator.com',
   },
+  {
+    name: 'User1 ',
+    roles: [ROLE.ADMIN],
+    email: 'user1@mailinator.com',
+  },
+  {
+    name: 'User2 ',
+    roles: [ROLE.ADMIN],
+    email: 'user2@mailinator.com',
+  },
 ];
 
 const prisma = new PrismaClient();
