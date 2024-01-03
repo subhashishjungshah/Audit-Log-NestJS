@@ -8,7 +8,9 @@ import {
   Delete,
   UseGuards,
   UseInterceptors,
+  Res,
 } from '@nestjs/common';
+import { FastifyReply } from 'fastify';
 import { UsersService } from './users.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.auth.guard';
@@ -38,7 +40,7 @@ export class UsersController {
   }
 
   @Roles('ADMIN')
-  @AuditLog('Get all user')
+  @AuditLog('list of all users.')
   @Get()
   @ApiOperation({ summary: 'List all user' })
   @ApiResponse({
@@ -47,8 +49,10 @@ export class UsersController {
     type: [CreateUserDto],
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  findAll() {
-    return this.usersService.findAll();
+  async findAll(@Res() res: FastifyReply) {
+    res['auditMessage'] = 'anything';
+    console.log(await this.usersService.findAll());
+    return res.send(await this.usersService.findAll());
   }
 
   @Roles('ADMIN')

@@ -14,7 +14,12 @@ export class AuditLogInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(async () => {
-        this.loggerService.createLog({ user: user?.email, action: auditlog });
+        const resp = context.switchToHttp().getResponse();
+        console.log(resp.auditMessage);
+        this.loggerService.createLog({
+          user: user?.email,
+          action: `${user?.email} requested ${auditlog}`,
+        });
       }),
     );
   }
