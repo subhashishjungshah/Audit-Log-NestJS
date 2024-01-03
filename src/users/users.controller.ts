@@ -50,8 +50,7 @@ export class UsersController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async findAll(@Res() res: FastifyReply) {
-    res['auditMessage'] = 'anything';
-    console.log(await this.usersService.findAll());
+    res['auditMessage'] = 'This action occured here';
     return res.send(await this.usersService.findAll());
   }
 
